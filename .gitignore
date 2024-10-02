@@ -38,3 +38,9 @@ out/
 
 ### properties ###
 *.properties
+
+### application-private.yml ###
+/src/main/resources/application-private.yml
+
+### .env ###
+.env

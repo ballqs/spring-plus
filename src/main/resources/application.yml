@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: spring-plus
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        use_sql_comments: true
+        dialect: org.hibernate.dialect.MySQLDialect
+  profiles:
+    include: private
+  config:
+    import: optional:file:.env[.properties]
