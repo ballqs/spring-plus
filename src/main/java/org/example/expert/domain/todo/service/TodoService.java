@@ -7,8 +7,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.example.expert.client.WeatherClient;
 import org.example.expert.domain.common.dto.AuthUser;
 import org.example.expert.domain.common.exception.InvalidRequestException;
+import org.example.expert.domain.todo.dto.request.TodoGetQueryDslRequest;
 import org.example.expert.domain.todo.dto.request.TodoGetRequest;
 import org.example.expert.domain.todo.dto.request.TodoSaveRequest;
+import org.example.expert.domain.todo.dto.response.TodoGetQueryDslResponse;
 import org.example.expert.domain.todo.dto.response.TodoResponse;
 import org.example.expert.domain.todo.dto.response.TodoSaveResponse;
 import org.example.expert.domain.todo.entity.Todo;
@@ -149,5 +151,15 @@ public class TodoService {
                 todo.getCreatedAt(),
                 todo.getModifiedAt()
         );
+    }
+
+    public List<TodoGetQueryDslResponse> getTodosQueryDsl(TodoGetQueryDslRequest todoGetQueryDslRequest) {
+        String title = todoGetQueryDslRequest.getTitle();
+        String nickName = todoGetQueryDslRequest.getNickName();
+        String startDt = todoGetQueryDslRequest.getStartDt();
+        String endDt = todoGetQueryDslRequest.getEndDt();
+        Pageable pageable = PageRequest.of(todoGetQueryDslRequest.getPage() - 1, todoGetQueryDslRequest.getSize());
+
+        return todoRepository.getTodoDetail(title , nickName , startDt , endDt , pageable);
     }
 }
