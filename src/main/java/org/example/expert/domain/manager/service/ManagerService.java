@@ -19,7 +19,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -29,9 +31,14 @@ public class ManagerService {
     private final ManagerRepository managerRepository;
     private final UserRepository userRepository;
     private final TodoRepository todoRepository;
+    private final HistoryService historyService;
 
     @Transactional
     public ManagerSaveResponse saveManager(UserPrincipal userPrincipal, long todoId, ManagerSaveRequest managerSaveRequest) {
+        Map<String , String> data = new HashMap<>();
+        data.put("user" , userPrincipal.getUser().getEmail());
+        historyService.saveLog(data);
+
         // 일정을 만든 유저
         User user = User.formUserPrincipal(userPrincipal);
         Todo todo = todoRepository.findById(todoId)
