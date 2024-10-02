@@ -15,6 +15,7 @@ import org.example.expert.domain.todo.entity.Todo;
 import org.example.expert.domain.todo.repository.TodoRepository;
 import org.example.expert.domain.user.dto.response.UserResponse;
 import org.example.expert.domain.user.entity.User;
+import org.example.expert.security.UserPrincipal;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -36,8 +37,8 @@ public class TodoService {
     private final EntityManager entityManager;
 
     @Transactional
-    public TodoSaveResponse saveTodo(AuthUser authUser, TodoSaveRequest todoSaveRequest) {
-        User user = User.fromAuthUser(authUser);
+    public TodoSaveResponse saveTodo(UserPrincipal userPrincipal, TodoSaveRequest todoSaveRequest) {
+        User user = User.formUserPrincipal(userPrincipal);
 
         String weather = weatherClient.getTodayWeather();
 
