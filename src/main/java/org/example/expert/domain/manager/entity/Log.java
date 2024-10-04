@@ -8,8 +8,8 @@ import org.example.expert.domain.common.entity.Timestamped;
 @Entity
 @Getter
 @NoArgsConstructor
-@Table(name = "history")
-public class History extends Timestamped {
+@Table(name = "log")
+public class Log extends Timestamped {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -17,7 +17,7 @@ public class History extends Timestamped {
     @Column(name = "json", columnDefinition = "longtext")
     private String json;
 
-    public History(String json) {
+    public Log(String json) {
         this.json = json;
     }
 }

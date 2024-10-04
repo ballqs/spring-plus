@@ -31,13 +31,13 @@ public class ManagerService {
     private final ManagerRepository managerRepository;
     private final UserRepository userRepository;
     private final TodoRepository todoRepository;
-    private final HistoryService historyService;
+    private final LogService logService;
 
     @Transactional
     public ManagerSaveResponse saveManager(UserPrincipal userPrincipal, long todoId, ManagerSaveRequest managerSaveRequest) {
         Map<String , String> data = new HashMap<>();
         data.put("user" , userPrincipal.getUser().getEmail());
-        historyService.saveLog(data);
+        logService.saveLog(data);
 
         // 일정을 만든 유저
         User user = User.formUserPrincipal(userPrincipal);

@@ -39,9 +39,9 @@ public class JwtFilter implements Filter {
 
         String url = httpRequest.getRequestURI();
 
-        log.info("test");
+        log.info("test : {}" , url);
 
-        if (url.startsWith("/auth")) {
+        if (url.startsWith("/auth") || url.startsWith("/health")) {
             chain.doFilter(request, response);
             return;
         }
