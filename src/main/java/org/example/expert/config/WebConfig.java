@@ -43,7 +43,7 @@ public class WebConfig {
 
         http.authorizeHttpRequests((authorizeHttpRequests) ->
                 authorizeHttpRequests
-                        .requestMatchers("/auth/signup" , "/auth/signin" , "/health").permitAll() // 로그인 , 회원가입 url 접근 허가
+                        .requestMatchers("/auth/signup" , "/auth/signin" , "/health" , "/test").permitAll() // 로그인 , 회원가입 url 접근 허가
 //                        .requestMatchers("/admin/*").hasRole(UserRole.ADMIN.name())
                         .anyRequest().authenticated() // 그 외 모든 요청 인증처리
         );

@@ -41,7 +41,7 @@ public class JwtFilter implements Filter {
 
         log.info("test : {}" , url);
 
-        if (url.startsWith("/auth") || url.startsWith("/health")) {
+        if (url.startsWith("/auth") || url.startsWith("/health") || url.startsWith("/test")) {
             chain.doFilter(request, response);
             return;
         }
