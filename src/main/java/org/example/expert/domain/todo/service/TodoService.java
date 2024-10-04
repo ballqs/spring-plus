@@ -17,7 +17,7 @@ import org.example.expert.domain.todo.entity.Todo;
 import org.example.expert.domain.todo.repository.TodoRepository;
 import org.example.expert.domain.user.dto.response.UserResponse;
 import org.example.expert.domain.user.entity.User;
-import org.example.expert.security.UserPrincipal;
+import org.example.expert.domain.user.repository.UserRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -35,12 +35,14 @@ import java.util.Objects;
 public class TodoService {
 
     private final TodoRepository todoRepository;
+    private final UserRepository userRepository;
     private final WeatherClient weatherClient;
     private final EntityManager entityManager;
 
     @Transactional
-    public TodoSaveResponse saveTodo(UserPrincipal userPrincipal, TodoSaveRequest todoSaveRequest) {
-        User user = User.formUserPrincipal(userPrincipal);
+    public TodoSaveResponse saveTodo(AuthUser authUser, TodoSaveRequest todoSaveRequest) {
+        User user = userRepository.findById(Long.parseLong(authUser.getUserId()))
+                .orElseThrow(() -> new InvalidRequestException("User not found"));
 
         String weather = weatherClient.getTodayWeather();
 

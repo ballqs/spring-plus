@@ -1,6 +1,7 @@
 package org.example.expert.domain.manager.service;
 
 import lombok.RequiredArgsConstructor;
+import org.example.expert.domain.common.dto.AuthUser;
 import org.example.expert.domain.common.exception.InvalidRequestException;
 import org.example.expert.domain.manager.dto.request.ManagerSaveRequest;
 import org.example.expert.domain.manager.dto.response.ManagerResponse;
@@ -12,7 +13,6 @@ import org.example.expert.domain.todo.repository.TodoRepository;
 import org.example.expert.domain.user.dto.response.UserResponse;
 import org.example.expert.domain.user.entity.User;
 import org.example.expert.domain.user.repository.UserRepository;
-import org.example.expert.security.UserPrincipal;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
@@ -33,13 +33,13 @@ public class ManagerService {
     private final LogService logService;
 
     @Transactional
-    public ManagerSaveResponse saveManager(UserPrincipal userPrincipal, long todoId, ManagerSaveRequest managerSaveRequest) {
+    public ManagerSaveResponse saveManager(AuthUser authUser, long todoId, ManagerSaveRequest managerSaveRequest) {
         Map<String , String> data = new HashMap<>();
-        data.put("user" , userPrincipal.getUser().getEmail());
+        data.put("user" , authUser.getEmail());
         logService.saveLog(data);
 
         // 일정을 만든 유저
-        User user = User.formUserPrincipal(userPrincipal);
+        User user = User.fromAuthUser(authUser);
         Todo todo = todoRepository.findById(todoId)
                 .orElseThrow(() -> new InvalidRequestException("Todo not found"));
 
@@ -81,8 +81,8 @@ public class ManagerService {
     }
 
     @Transactional
-    public void deleteManager(UserPrincipal userPrincipal, long todoId, long managerId) {
-        User user = User.formUserPrincipal(userPrincipal);
+    public void deleteManager(AuthUser authUser, long todoId, long managerId) {
+        User user = User.fromAuthUser(authUser);
 
         Todo todo = todoRepository.findById(todoId)
                 .orElseThrow(() -> new InvalidRequestException("Todo not found"));
