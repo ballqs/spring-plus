@@ -35,3 +35,15 @@ Spring boot JwtFilter에 찍어둔 log가 제대로 호출되는 것을 확인
 
 ![image](https://github.com/user-attachments/assets/9811634d-ba66-4390-acc1-719015b3cc9c)
 ![image](https://github.com/user-attachments/assets/414e36b7-e8c6-49cc-9129-4f1fbd33a219)
+
+# S3
+
+![image](https://github.com/user-attachments/assets/2849dcda-5031-4e39-aba7-2f97c9ac0e7c)
+![image](https://github.com/user-attachments/assets/ea01c8f0-97b2-4d95-b158-967dc3488dc3)
+![image](https://github.com/user-attachments/assets/fa7ab821-1b22-43ae-9da3-d3383fb72d52)
+![image](https://github.com/user-attachments/assets/8ab8f232-1105-47de-a556-1c0a5bf5f4d0)
+
+# IAM(User)
+
+![image](https://github.com/user-attachments/assets/236bf82a-0082-41e3-9d56-36d53dd089ad)
+![image](https://github.com/user-attachments/assets/1ed24ddb-12ce-4de1-a70b-c5672122284c)
